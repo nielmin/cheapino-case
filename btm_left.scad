@@ -9,12 +9,6 @@ module mount_holes() {
     import("default_holes.svg", center=true);
 }
 
-module mount_holes2() {
-    translate([0,0,-2.5])
-    linear_extrude(2)
-    import("heat-inserts.svg", center=true);
-}
-
 module rj45_jack(is_left) {
     color("cyan") {
         if (is_left == 1) {
@@ -42,15 +36,6 @@ module btm_case() {
     };
 }
 
-module screw_holes(x,y,z, type) {
- translate([x,y,z])
-    rotate([0,180,0])
-    if (type == 1) {
-        mount_holes2();
-    } else {
-        mount_holes();
-    }
-}
 module cover(out, out_wall, in, in_wall) {
     translate([0,0,-2])
     difference() {
@@ -70,20 +55,6 @@ module final_plate() {
             lt_plate();
             cover(2.4, 5, 1.1, 4);
         }
-        // To accomodate screw heads if using screws
-        translate([0,0,-3.5])
-        //screw_holes(-1,-5,1);
-        #inserts(2,2,4);
-    }
-}
-
-module btm_cover_scew_holes() {
-    difference() {
-        difference() {
-            cover(2.2, 9, 1.1, 7);
-            inserts(2,1,0);        
-        }
-        thumb_cutout(1);
     }
 }
 
@@ -100,6 +71,14 @@ module thumb_cutout(is_left) {
     }
 }
 
+module btm_cover_w_tc() {
+    difference() {
+        difference() {
+            cover(2.2, 7.5, 1.1, 6.5);
+        }
+        thumb_cutout(1);
+    }
+}
 
 module inserts(ch, cr, cz) {
     color("green") {
@@ -131,13 +110,29 @@ module inserts(ch, cr, cz) {
         cylinder(h=ch,r=cr,center=true);
     };
 }
-rotate([0,180,0]) 
-//translate([0,0,2])
-final_plate();
 
-//difference() {
-//inserts(2,1.5,0);
-//#inserts(4,1,0);
-//}
-//translate([0,0,-4])
-//btm_cover_scew_holes();
+//module btm_cover_w_cutouts() {
+//    difference() {
+//        difference(){
+//            btm_cover_scew_holes();
+//            //translate([0,0,-0.8]) rj45_sm();
+//        }
+//        //translate([0,0,-1])
+//        //switches(1); 
+//    }
+//};
+
+module rj45_sm() {
+    rj_hole();
+    translate([0,-11.43,0]) rj_hole();
+
+    // rj 45 housing through holes
+    translate([3.1,2,0]) rj_hole();
+    translate([3.1,-13.49,0]) rj_hole();
+};
+
+//rotate([0,180,0]) 
+//translate([0,0,5])
+//final_plate();
+
+btm_cover_w_tc();

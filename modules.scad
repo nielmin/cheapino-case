@@ -29,7 +29,8 @@ module board()
 }
 
 module hotswap_mx() {
-    thickness=1.85;
+    //thickness=1.85;
+    thickness=5;
 
     // Holes
     translate([3.175,2.2,0])
@@ -51,11 +52,15 @@ module hotswap_mx() {
     // Metal soldering parts
     translate([5.45,1.04,0])
     linear_extrude(height=thickness)
-    square([2.5, 2.55]);
+    //square([2.5, 2.55]);
+    square([2.6, 2.65]);
+
 
     translate([-7.95,-1.7,0])
     linear_extrude(height=thickness)
-    square([2.5, 2.55]);
+    //square([2.5, 2.55]);
+    square([2.6, 2.65]);
+
 }
 
 
@@ -80,7 +85,7 @@ module switch(bottom) {
   // means 1.2 of it sticks below, 1.3 for margin
   color("#2ca02c")
   translate([-0.57, -4.7, 0])
-  linear_extrude(height=1)
+  linear_extrude(height=2)
   circle(d=4.2);
 
 
@@ -89,12 +94,12 @@ module switch(bottom) {
   // They will need to be snipped if too long
   color("#d62728")
   translate([-5.74, -4.7, 0])
-  linear_extrude(height=1)
+  linear_extrude(height=2)
   circle(d=1.8);
 
   color("#d62728")
   translate([4.45, -4.7, 0])
-  linear_extrude(height=1)
+  linear_extrude(height=2)
   circle(d=1.8);
 
 }
@@ -125,7 +130,7 @@ difference() {
 
 module rj_hole() {
 color("#e377c2")
-  linear_extrude(1.7) {
+  linear_extrude(2) {
   translate([40.1,3.5,0])
   circle(d=3.5);
   translate([40.1,4.8,0])

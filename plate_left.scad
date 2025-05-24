@@ -36,6 +36,7 @@ module rotary_encoder() {
 }
 
 module top_plate(height, offset) {
+    // 5 mm for a plate is what I found to be good.
     linear_extrude(height) 
     offset(offset) base();
 }
@@ -54,7 +55,7 @@ module plate_cutouts(left) {
 module lt_plate() {
     difference() {
         difference() {
-            top_plate(5, 2.4);
+            top_plate(5, 2.2);
             plate_cutouts(1);
         };
         diodes();
