@@ -63,7 +63,7 @@ module rj45_sm() {
 //final_plate();
 
 difference() {
-    // 8.5mm
-    cover(2.2, 8.5, 1.1, 7);
-    thumb_cutout();
+    // 9 mm
+    cover(2.2, 9, 1.1, 8);
+    thumb_cutout(1);
 }
